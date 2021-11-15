@@ -1,6 +1,8 @@
 import {runInAction} from "mobx";
 import {addPersonStore} from "../store/AddPersonStore";
-import {addPersonService} from "../service/addPersonService";
+import {setPersonService} from "../service/setPersonService";
+import {deletePersonService} from "../service/deletePersonService";
+import {changePersonService} from "../service/changePersonService";
 
 
 export class PersonController {
@@ -34,6 +36,14 @@ export class PersonController {
 
 
     static addPerson() {
-        addPersonService()
+        setPersonService()
+    }
+
+    static deletePerson(personId: string) {
+        deletePersonService(personId)
+    }
+
+    static changePerson(personId: string) {
+        changePersonService(personId)
     }
 }

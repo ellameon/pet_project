@@ -2,6 +2,7 @@
 import {observable} from "mobx";
 
 export interface AddPersonStore {
+    id: string
     name: string
     surname: string
     address: string
@@ -11,6 +12,7 @@ export interface AddPersonStore {
 }
 
 export  const addPersonStore = observable<AddPersonStore> ({
+    id: "0",
     name: '',
     surname: '',
     address: '',

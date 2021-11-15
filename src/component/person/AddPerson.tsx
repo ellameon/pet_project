@@ -7,6 +7,9 @@ import {observer} from "mobx-react";
 export const AddPerson = observer(function AddPerson() {
     const {name, surname, address, email, phone} = addPersonStore
 
+
+
+
     const addPerson = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
       PersonController.addPerson()
     },[])

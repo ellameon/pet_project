@@ -25,6 +25,7 @@ export class PersonController {
     static setPhone(phone: string) {
         runInAction(() => {
             addPersonStore.phone = phone
+            addPersonStore.isPhoneValid = true
         })
     }
     static setEmail(email: string) {

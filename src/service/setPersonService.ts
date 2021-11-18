@@ -9,9 +9,7 @@ export const setPersonService = () => {
         if (!isPersonValid()) {
             return
         }
-        if (!isPhoneValid()) {
-            return;
-        }
+
         if (addPersonStore.id === "0") {
             addPerson()
             clearAddPersonStore()
@@ -67,7 +65,17 @@ function clearAddPersonStore() {
     addPersonStore.email = ''
 }
 
-function isPersonValid() {
+
+function isPersonValid(): boolean {
+    let isValid = addPersonStore.isValid
+
+    isValid = isEmailValid() && isValid
+    isValid = isPhoneValid() && isValid
+
+    return isValid
+}
+
+function isEmailValid() {
     if (!addPersonStore.email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
         addPersonStore.isEmailValid = false
         return false

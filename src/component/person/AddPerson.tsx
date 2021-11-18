@@ -1,4 +1,4 @@
-import React, {ChangeEvent, MouseEventHandler, useCallback} from "react";
+import React, {ChangeEvent, useCallback} from "react";
 import {addPersonStore} from "../../store/AddPersonStore";
 import {PersonController} from "../../controller/PersonController";
 import {observer} from "mobx-react";
@@ -6,9 +6,9 @@ import {observer} from "mobx-react";
 
 export const AddPerson = observer(function AddPerson() {
     const {name, surname, address, email, phone, isEmailValid, isPhoneValid} = addPersonStore
+    const phoneClasses = "form-control" + (isPhoneValid ? "" : " is-invalid")
+    const emailClasses = "form-control" + (isEmailValid ? "" : " is-invalid")
 
-    const emailClasses = "form-control" + ( isEmailValid ? "" : " is-invalid")
-    const phoneClasses = "form-control" + ( isPhoneValid ? "" : " is-invalid")
 
     const addPerson = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
         PersonController.addPerson()
@@ -70,7 +70,7 @@ export const AddPerson = observer(function AddPerson() {
         <div className="row  justify-content-center">
             <div className="col-2">
                 <button onClick={addPerson} type="submit"
-                        disabled={!addPersonStore.isEmailValid}
+                        disabled={!addPersonStore.isValid}
                         className="btn btn-outline-secondary ">Сохранить
                 </button>
             </div>

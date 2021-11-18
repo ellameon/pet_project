@@ -9,7 +9,6 @@ export const setPersonService = () => {
         if (!isPersonValid()) {
             return
         }
-
         if (addPersonStore.id === "0") {
             addPerson()
             clearAddPersonStore()
@@ -65,12 +64,14 @@ function clearAddPersonStore() {
     addPersonStore.email = ''
 }
 
-
+//FIXME разделить возвращение значиния валидности и запись валидности в стор
 function isPersonValid(): boolean {
-    let isValid = addPersonStore.isValid
+    let isValid = true
 
     isValid = isEmailValid() && isValid
     isValid = isPhoneValid() && isValid
+    isValid = isNameValid() && isValid
+    isValid = isSurnameValid() && isValid
 
     return isValid
 }
@@ -82,6 +83,7 @@ function isEmailValid() {
     }
     return true
 }
+
 function isPhoneValid() {
     if (!addPersonStore.phone.match(/^(\+7|7|8)?[\s-]?\(?[489][0-9]{2}\)?[\s-]?[0-9]{3}[\s-]?[0-9]{2}[\s-]?[0-9]{2}$/)) {
         addPersonStore.isPhoneValid = false
@@ -90,4 +92,24 @@ function isPhoneValid() {
     return true
 }
 
+function isNameValid() {
+
+    if (addPersonStore.name.length === 0) {
+        addPersonStore.isNameValid = false
+    }
+    if (addPersonStore.name.length > 50) {
+        addPersonStore.isNameValid = false
+    }
+    return true
+}
+function isSurnameValid() {
+
+    if (addPersonStore.surname.length === 0) {
+        addPersonStore.isSurnameValid = false
+    }
+    if (addPersonStore.surname.length > 100) {
+        addPersonStore.isSurnameValid = false
+    }
+    return true
+}
 

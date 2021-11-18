@@ -8,6 +8,7 @@ export interface AddPersonStore {
     phone: string
     email: string
     isEmailValid: boolean
+    isPhoneValid: boolean
 }
 
 export  const addPersonStore = observable<AddPersonStore> ({
@@ -17,5 +18,6 @@ export  const addPersonStore = observable<AddPersonStore> ({
     address: '',
     phone: '',
     email: '',
-    isEmailValid: true
+    isEmailValid: true,
+    isPhoneValid: true
 })

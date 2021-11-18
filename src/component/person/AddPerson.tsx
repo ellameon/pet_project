@@ -5,9 +5,10 @@ import {observer} from "mobx-react";
 
 
 export const AddPerson = observer(function AddPerson() {
-    const {name, surname, address, email, phone, isEmailValid} = addPersonStore
+    const {name, surname, address, email, phone, isEmailValid, isPhoneValid} = addPersonStore
 
     const emailClasses = "form-control" + ( isEmailValid ? "" : " is-invalid")
+    const phoneClasses = "form-control" + ( isPhoneValid ? "" : " is-invalid")
 
     const addPerson = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
         PersonController.addPerson()
@@ -57,7 +58,7 @@ export const AddPerson = observer(function AddPerson() {
                            aria-describedby="addon-wrapping"/>
                     <div className="">Введите телефон</div>
                     <input onChange={onChangePhone} value={phone}
-                           type="text" className="form-control" aria-label="Имя пользователя"
+                           type="text" className={phoneClasses} aria-label="Имя пользователя"
                            aria-describedby="addon-wrapping"/>
                     <div className="">Введите e-mail<span>*</span></div>
                     <input onChange={onChangeEmail} value={email}

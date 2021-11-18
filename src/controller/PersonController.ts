@@ -30,19 +30,15 @@ export class PersonController {
     static setEmail(email: string) {
         runInAction(() => {
             addPersonStore.email = email
+            addPersonStore.isEmailValid = true
         })
     }
-
-
-
     static addPerson() {
         setPersonService()
     }
-
     static deletePerson(personId: string) {
         deletePersonService(personId)
     }
-
     static changePerson(personId: string) {
         changePersonService(personId)
     }

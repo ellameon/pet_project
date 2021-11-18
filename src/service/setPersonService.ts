@@ -6,9 +6,9 @@ import {runInAction} from "mobx";
 
 export const setPersonService = () => {
     runInAction(() => {
-
-
-
+        if (!isPersonValid()) {
+            return
+        }
         if (addPersonStore.id === "0") {
             addPerson()
             clearAddPersonStore()
@@ -28,6 +28,7 @@ function addPerson() {
         phone: addPersonStore.phone,
         email: addPersonStore.email ?? ""
     }
+
     const newPersonArray = personStore.persons
     newPersonArray.push(newPerson)
     personStore.persons = newPersonArray
@@ -62,3 +63,13 @@ function clearAddPersonStore() {
     addPersonStore.phone = ''
     addPersonStore.email = ''
 }
+
+function isPersonValid() {
+    if (!addPersonStore.email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
+        addPersonStore.isEmailValid = false
+        return false
+    }
+    return true
+}
+
+

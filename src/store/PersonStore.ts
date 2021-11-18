@@ -16,16 +16,6 @@ const defaultPerson: Person = {
     sex: 'male'
 };
 
-// const defaultPerson2: Person = {
-//     id: 2,
-//     name: "Andrew",
-//     surname: 'Volkov',
-//     phone: '89765432121',
-//     address: 'Spb',
-//     email: 'example@mail.com',
-//     sex: 'male'
-// };
-
 export const personStore = observable<PersonStore>({
     persons: [defaultPerson ],
     lastPersonId: "1",

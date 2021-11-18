@@ -1,4 +1,3 @@
-
 import {observable} from "mobx";
 
 export interface AddPersonStore {
@@ -8,7 +7,7 @@ export interface AddPersonStore {
     address: string
     phone: string
     email: string
-    // photo: string
+    isEmailValid: boolean
 }
 
 export  const addPersonStore = observable<AddPersonStore> ({
@@ -17,5 +16,6 @@ export  const addPersonStore = observable<AddPersonStore> ({
     surname: '',
     address: '',
     phone: '',
-    email: ''
+    email: '',
+    isEmailValid: true
 })

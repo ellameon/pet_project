@@ -5,15 +5,13 @@ import {observer} from "mobx-react";
 
 
 export const AddPerson = observer(function AddPerson() {
-    const {name, surname, address, email, phone} = addPersonStore
+    const {name, surname, address, email, phone, isEmailValid} = addPersonStore
 
-
-
+    const emailClasses = "form-control" + ( isEmailValid ? "" : " is-invalid")
 
     const addPerson = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
-      PersonController.addPerson()
-    },[])
-
+        PersonController.addPerson()
+    }, [])
     const onChangeName = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         const name = event.target.value
         PersonController.setName(name)
@@ -35,11 +33,6 @@ export const AddPerson = observer(function AddPerson() {
         PersonController.setEmail(email)
     }, [])
 
-
-
-
-
-
     return <>
         <div className="card">
             <div className="card-header">Добавление новой записи</div>
@@ -51,30 +44,35 @@ export const AddPerson = observer(function AddPerson() {
                 </div>
                 <div className="col">
                     <div className="">Введите имя</div>
-                    <input onChange={onChangeName} value={name} type="text" className="form-control" aria-label="Имя пользователя"
+                    <input onChange={onChangeName} value={name}
+                           type="text" className="form-control" aria-label="Имя пользователя"
                            aria-describedby="addon-wrapping"/>
                     <div className="">Введите фамилию</div>
-                    <input onChange={onChangeSurname} value={surname} type="text" className="form-control" aria-label="Имя пользователя"
+                    <input onChange={onChangeSurname} value={surname}
+                           type="text" className="form-control" aria-label="Имя пользователя"
                            aria-describedby="addon-wrapping"/>
                     <div className="">Введите адрес</div>
-                    <input onChange={onChangeAddress} value={address} type="text" className="form-control" aria-label="Имя пользователя"
+                    <input onChange={onChangeAddress} value={address}
+                           type="text" className="form-control" aria-label="Имя пользователя"
                            aria-describedby="addon-wrapping"/>
                     <div className="">Введите телефон</div>
-                    <input onChange={onChangePhone} value={phone} type="text" className="form-control" aria-label="Имя пользователя"
+                    <input onChange={onChangePhone} value={phone}
+                           type="text" className="form-control" aria-label="Имя пользователя"
                            aria-describedby="addon-wrapping"/>
-                    <div className="">Введите e-mail</div>
-                    <input onChange={onChangeEmail} value={email} type="text" className="form-control" aria-label="Имя пользователя"
+                    <div className="">Введите e-mail<span>*</span></div>
+                    <input onChange={onChangeEmail} value={email}
+                           type="text" className={emailClasses} aria-label="Имя пользователя"
                            aria-describedby="addon-wrapping"/>
-
                 </div>
             </div>
-
         </div>
         <div className="row  justify-content-center">
             <div className="col-2">
-                <button onClick = {addPerson}  type="button" className="btn btn-outline-secondary">Сохранить</button>
+                <button onClick={addPerson} type="submit"
+                        disabled={!addPersonStore.isEmailValid}
+                        className="btn btn-outline-secondary ">Сохранить
+                </button>
             </div>
         </div>
-
     </>
 })
